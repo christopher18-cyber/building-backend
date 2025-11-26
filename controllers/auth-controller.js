@@ -70,7 +70,7 @@ export async function loginUser(req, res) {
                     userId: user._id,
                     username: user.username,
                     role: user.role
-                }, process.env.JWT_SECRET_KEY, { expiresIn: "1m" })
+                }, process.env.JWT_SECRET_KEY, { expiresIn: "30m" })
                 res.status(200).json({
                     message: `Logged in successfully`,
                     success: true,

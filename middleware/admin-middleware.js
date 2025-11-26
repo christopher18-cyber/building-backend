@@ -1,8 +1,10 @@
 import express from "express"
-const isAdminUser = (req, res, next) => {
-    if (req.user.role !== "admin") {
+export const isAdminUser = (req, res, next) => {
+    if (req.userInfo.role !== "admin") {
         res.status(403).json({
             success: false,
+            message: `Access denied, Admin rights required.`
         })
     }
+    next()
 }
