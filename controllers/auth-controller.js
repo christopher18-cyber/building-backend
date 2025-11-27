@@ -136,17 +136,6 @@ export async function changePassword(req, res) {
 }
 
 
-export async function deleteImageController(req, res) {
-    try { }
-    catch (err) {
-        console.error(err)
-        res.status(500).json({
-            message: `Some error occured.`,
-            success: false,
-        })
-    }
-}
-
 export async function forgottenPassword(req, res) {
     try { }
     catch (err) {
