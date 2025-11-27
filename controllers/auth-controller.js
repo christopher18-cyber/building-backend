@@ -87,3 +87,73 @@ export async function loginUser(req, res) {
         })
     }
 }
+
+export async function changePassword(req, res) {
+    try {
+        const userId = req.userInfo.userId
+
+        // extract old and new password
+        const { oldPassword, newPassword } = req.body
+
+        // find the current logged in user
+
+        const user = await User.findById(userId)
+
+        if (!user) {
+            res.status(400).json({
+                success: false,
+                message: `User not found.`
+            })
+        }
+
+        const isPasswordMatch = await bcrypt.compare(oldPassword, user.password)
+        if (!isPasswordMatch) {
+            res.status(400).json({
+                success: false,
+                message: "The old password is not correct!, please try again."
+            })
+        }
+        // hash the new password
+        const salt = await bcrypt.genSalt(10)
+        const newhashedPassword = await bcrypt.hash(newPassword, salt)
+
+        // update password
+        user.password = newhashedPassword
+        await user.save()
+
+        res.status(200).json({
+            success: true,
+            message: `Password changed successfully.`
+        })
+    }
+    catch (err) {
+        console.error(err)
+        res.status(500).json({
+            message: `Some error occured.`,
+            success: false,
+        })
+    }
+}
+
+
+export async function deleteImageController(req, res) {
+    try { }
+    catch (err) {
+        console.error(err)
+        res.status(500).json({
+            message: `Some error occured.`,
+            success: false,
+        })
+    }
+}
+
+export async function forgottenPassword(req, res) {
+    try { }
+    catch (err) {
+        console.error(err)
+        res.status(500).json({
+            message: ``,
+            success: false
+        })
+    }
+}
