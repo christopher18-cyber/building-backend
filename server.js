@@ -5,6 +5,7 @@ import connectToDB from "./database/db.js"
 import authRoutes from "./routes/auth-routes.js"
 import homeRoutes from "./routes/home-routes.js"
 import adminRoutes from "./routes/admin-routes.js"
+import uploadRoutes from "./routes/image-routes.js"
 
 connectToDB()
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use("/api/auth", authRoutes)
 app.use("/api/home", homeRoutes)
 app.use("/api/admin", adminRoutes)
+app.use("/api/image", uploadRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is now listening on ${PORT}`)

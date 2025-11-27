@@ -1,4 +1,4 @@
-import cloudinary from "../config/cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
 export async function uploadToCloudinary(filePath) {
     try {
@@ -8,8 +8,10 @@ export async function uploadToCloudinary(filePath) {
             publicId: result.public_id
         }
     }
-    catch (err) { "Error while uploading to cloudinary.", err }
-    throw new Error("Error while uploading to cloudinary.");
+    catch (err) {
+        console.error("Error while uploading to cloudinary.", err)
+        throw new Error("Error while uploading to cloudinary.");
+    }
 
 }
 
